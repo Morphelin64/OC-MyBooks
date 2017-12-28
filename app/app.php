@@ -12,5 +12,5 @@ $app->register(new Silex\Provider\DoctrineServiceProvider());
 
 // Register services.
 $app['dao.book'] = function ($app) {
-    return new MYBOOKS\DAO\BookDAO($app['db']);
+    return new Mybooks\DAO\BookDAO($app['db']);
 };

@@ -1,9 +1,9 @@
 <?php
 
-namespace MYBOOKS\DAO;
+namespace Mybooks\DAO;
 
 use Doctrine\DBAL\Connection;
-use MYBOOKS\Domain\Book;
+use Mybooks\Domain\Book;
 
 class BookDAO
 {

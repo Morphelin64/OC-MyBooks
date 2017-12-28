@@ -1,6 +1,6 @@
 <?php
 
-namespace MYBOOKS\Domain;
+namespace Mybooks\Domain;
 
 class Book 
 {
