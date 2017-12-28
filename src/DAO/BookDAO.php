@@ -51,7 +51,7 @@ class BookDAO
         $book = new Book();
         $book->setId($row['book_id']);
         $book->setTitle($row['book_title']);
-        $book->setContent($row['book_summary']);
+        $book->setSummary($row['book_summary']);
         return $book;
     }
 }
