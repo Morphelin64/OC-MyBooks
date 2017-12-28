@@ -2,7 +2,7 @@
 
 // Home page
 $app->get('/', function () use ($app) {
-    $articles = $app['dao.book']->findAll();
+    $books = $app['dao.book']->findAll();
 
     ob_start();             // start buffering HTML output
     require '../views/view.php';
