@@ -3,20 +3,20 @@
 <head>
     <meta charset="utf-8" />
     <link href="mybooks.css" rel="stylesheet" />
-    <title>MyBooks - Home</title>
+    <title>MyBooks - Accueil</title>
 </head>
 <body>
     <header>
         <h1>MyBooks</h1>
     </header>
-    <?php foreach ($books as $book): ?>
+    {% for book in books %}
     <article>
-        <h2><?php echo $book->getTitle() ?></h2>
-        <p><?php echo $book->getSummary() ?></p>
+        <h2>{{ book.title }}</h2>
+        <p>{{ book.summary }}></p>
     </article>
-    <?php endforeach ?>
+    {% endfor %}
     <footer class="footer">
-        <a href="https://github.com/juannitoo/OC-MyBooks/tree/master" >
+        <a href="https://github.com/juannitoo/OC-MyBooks" >
         MyBooks</a> is a minimalistic CMS built as a showcase 
         for modern PHP development.
     </footer>
