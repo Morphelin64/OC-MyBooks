@@ -33,7 +33,7 @@ class Book
     private $summary;
 
     /**
-     * Book summary.
+     * Book author id.
      *
      * @var number
      */

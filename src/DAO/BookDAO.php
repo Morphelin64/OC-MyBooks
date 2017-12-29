@@ -2,27 +2,10 @@
 
 namespace Mybooks\DAO;
 
-use Doctrine\DBAL\Connection;
 use Mybooks\Domain\Book;
 
-class BookDAO
+class BookDAO extends DAO
 {
-    /**
-     * Database connection
-     *
-     * @var \Doctrine\DBAL\Connection
-     */
-    private $db;
-
-    /**
-     * Constructor
-     *
-     * @param \Doctrine\DBAL\Connection The database connection object
-     */
-    public function __construct(Connection $db) {
-        $this->db = $db;
-    }
-
     /**
      * Return a list of all books, sorted by date (most recent first).
      *
@@ -36,18 +19,18 @@ class BookDAO
         $books = array();
         foreach ($result as $row) {
             $bookId = $row['book_id'];
-            $books[$bookId] = $this->buildBook($row);
+            $books[$bookId] = $this->buildDomainObject($row);
         }
         return $books;
     }
 
     /**
-     * Creates an Article object based on a DB row.
+     * Creates a book object based on a DB row.
      *
      * @param array $row The DB row containing Book data.
      * @return \MYBOOKS\Domain\book
      */
-    private function buildBook(array $row) {
+    private function buildDomainObject(array $row) {
         $book = new Book();
         $book->setId($row['book_id']);
         $book->setTitle($row['book_title']);
