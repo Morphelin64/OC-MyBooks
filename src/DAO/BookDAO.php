@@ -2,27 +2,10 @@
 
 namespace Mybooks\DAO;
 
-use Doctrine\DBAL\Connection;
 use Mybooks\Domain\Book;
 
-class BookDAO
+class BookDAO extends DAO
 {
-    /**
-     * Database connection
-     *
-     * @var \Doctrine\DBAL\Connection
-     */
-    private $db;
-
-    /**
-     * Constructor
-     *
-     * @param \Doctrine\DBAL\Connection The database connection object
-     */
-    public function __construct(Connection $db) {
-        $this->db = $db;
-    }
-
     /**
      * Return a list of all books, sorted by date (most recent first).
      *
@@ -30,28 +13,45 @@ class BookDAO
      */
     public function findAll() {
         $sql = "select * from book order by book_id desc";
-        $result = $this->db->fetchAll($sql);
+        $result = $this->getDb()->fetchAll($sql);
         
         // Convert query result to an array of domain objects
         $books = array();
         foreach ($result as $row) {
             $bookId = $row['book_id'];
-            $books[$bookId] = $this->buildBook($row);
+            $books[$bookId] = $this->buildDomainObject($row);
         }
         return $books;
     }
 
     /**
-     * Creates an Article object based on a DB row.
+     * Creates a book object based on a DB row.
      *
      * @param array $row The DB row containing Book data.
      * @return \MYBOOKS\Domain\book
      */
-    private function buildBook(array $row) {
-        $book = new Book();
-        $book->setId($row['book_id']);
+    protected function buildDomainObject(array $row) {
+        $book = new Book();      
         $book->setTitle($row['book_title']);
         $book->setSummary($row['book_summary']);
+        $book->setId($row['book_id']);
         return $book;
+    }
+
+    /**
+     * Returns a book matching the supplied id.
+     *
+     * @param integer $id
+     *
+     * @return \Mybooks\Domain\Book|throws an exception if no matching article is found
+     */
+    public function find($id) {
+        $sql = "select * from book where book_id=?";
+        $row = $this->getDb()->fetchAssoc($sql, array($id));
+
+        if ($row)
+            return $this->buildDomainObject($row);
+        else
+            throw new \Exception("No article matching id " . $id);
     }
 }

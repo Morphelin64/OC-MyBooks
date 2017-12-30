@@ -2,7 +2,7 @@
 
 namespace Mybooks\Domain;
 
-class Book 
+class Book extends Author
 {
     /**
      * Book id.
@@ -33,11 +33,11 @@ class Book
     private $summary;
 
     /**
-     * Book summary.
+     * Book author id.
      *
      * @var number
      */
-    private $auth_id;
+    // private $auth_id;
 
     public function getId() {
         return $this->id;
@@ -67,11 +67,11 @@ class Book
     }
 
     public function getIsbn() {
-        return $this->$isbn;
+        return $this->isbn;
     }
 
     public function setIsbn($isbn) {
-        $this->title = $isbn;
+        $this->isbn = $isbn;
         return $this;
     }
 
