@@ -3,6 +3,7 @@
 namespace Mybooks\DAO;
 
 use Doctrine\DBAL\Connection;
+use Mybooks\Domain\Book;
 
 abstract class DAO 
 {
@@ -33,7 +34,19 @@ abstract class DAO
 
     /**
      * Builds a domain object from a DB row.
-     * Must be overridden by child classes.
      */
-    //protected abstract function buildDomainObject(array $row);
+    protected function buildDomainObject(array $row){
+        $book = new Book();      
+        $book->setId($row['book_id']);
+        $book->setTitle($row['book_title']);
+        $book->setIsbn($row['book_isbn']);
+        $book->setSummary($row['book_summary']);
+
+        if (!(empty($row['auth_first_name']))) {   
+            $book->setFirstName($row['auth_first_name']);
+            $book->setLastName($row['auth_last_name']);
+        }
+        
+        return $book;
+    }
 }

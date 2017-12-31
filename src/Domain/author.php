@@ -18,6 +18,13 @@ class Author
      */
     public $auth_last_name;
 
+    /**
+     * Associated book.
+     *
+     * @var \MicroCMS\Domain\Book
+     */
+    private $book;
+
     public function getFirstName() {
         return $this->auth_first_name;
     }
@@ -35,5 +42,9 @@ class Author
         $this->auth_last_name = $auth_last_name;
         return $this;
     }
-
+    
+    public function setBook(Book $book) {
+        $this->book = $book;
+        return $this;
+    }
 }

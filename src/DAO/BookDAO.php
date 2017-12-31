@@ -25,21 +25,7 @@ class BookDAO extends DAO
     }
 
     /**
-     * Creates a book object based on a DB row.
-     *
-     * @param array $row The DB row containing Book data.
-     * @return \MYBOOKS\Domain\book
-     */
-    protected function buildDomainObject(array $row) {
-        $book = new Book();      
-        $book->setTitle($row['book_title']);
-        $book->setSummary($row['book_summary']);
-        $book->setId($row['book_id']);
-        return $book;
-    }
-
-    /**
-     * Returns a book matching the supplied id.
+     * Returns a book matching the supplied id. (routes.php)
      *
      * @param integer $id
      *
